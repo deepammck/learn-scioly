@@ -326,121 +326,135 @@ body {
   font-size: 0.85em;
 }
 
-/* ── Markdown rendering ────────────────────────────── */
-#guide-body h1 {
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 10px;
-  margin: 0 0 20px;
-}
-#guide-body h2 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text);
-  margin: 28px 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--border);
-}
-#guide-body h3 {
+/* ── Markdown rendering ─────────────────────────────
+   Shared by #guide-body AND .lesson-guide-body
+─────────────────────────────────────────────────── */
+#guide-body,
+.lesson-guide-body {
   font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+#guide-body h1, .lesson-guide-body h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+  margin: 0 0 22px;
+}
+#guide-body h2, .lesson-guide-body h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 32px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+#guide-body h3, .lesson-guide-body h3 {
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--accent);
-  margin: 20px 0 8px;
+  margin: 22px 0 10px;
 }
-#guide-body h4 {
-  font-size: 0.9rem;
+#guide-body h4, .lesson-guide-body h4 {
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-dim);
-  margin: 16px 0 6px;
+  margin: 18px 0 8px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-#guide-body p {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin: 0 0 12px;
+#guide-body p, .lesson-guide-body p {
+  font-size: 1rem;
+  line-height: 1.75;
+  margin: 0 0 14px;
   color: var(--text);
 }
-#guide-body li {
-  font-size: 0.9rem;
-  line-height: 1.7;
+#guide-body li, .lesson-guide-body li {
+  font-size: 1rem;
+  line-height: 1.75;
   color: var(--text);
+  margin-bottom: 4px;
 }
-#guide-body ul, #guide-body ol {
-  margin: 8px 0 14px 20px;
+#guide-body ul, #guide-body ol,
+.lesson-guide-body ul, .lesson-guide-body ol {
+  margin: 8px 0 16px 22px;
 }
-#guide-body ul li::marker { color: var(--text-dim); }
-#guide-body strong { color: var(--text); font-weight: 700; }
-#guide-body em { color: var(--text-dim); }
-#guide-body a { color: var(--accent); text-decoration: none; }
-#guide-body a:hover { text-decoration: underline; }
-#guide-body code {
+#guide-body ul li::marker,
+.lesson-guide-body ul li::marker { color: var(--accent); }
+#guide-body strong, .lesson-guide-body strong { color: var(--text); font-weight: 700; }
+#guide-body em, .lesson-guide-body em { color: var(--text-dim); }
+#guide-body a, .lesson-guide-body a { color: var(--accent); text-decoration: none; }
+#guide-body a:hover, .lesson-guide-body a:hover { text-decoration: underline; }
+#guide-body code, .lesson-guide-body code {
   font-family: var(--mono);
-  font-size: 0.82em;
+  font-size: 0.88em;
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 1px 6px;
+  padding: 2px 6px;
   color: var(--orange);
 }
-#guide-body pre {
+#guide-body pre, .lesson-guide-body pre {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 16px;
   overflow-x: auto;
-  margin: 12px 0;
+  margin: 14px 0;
 }
-#guide-body pre code {
+#guide-body pre code, .lesson-guide-body pre code {
   background: none;
   border: none;
   padding: 0;
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   color: var(--text);
 }
-#guide-body blockquote {
+#guide-body blockquote, .lesson-guide-body blockquote {
   border-left: 3px solid var(--accent);
-  margin: 12px 0;
-  padding: 8px 14px;
+  margin: 14px 0;
+  padding: 10px 16px;
   background: var(--surface2);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   font-style: italic;
   color: var(--text-dim);
+  font-size: 0.97rem;
 }
-#guide-body hr {
+#guide-body hr, .lesson-guide-body hr {
   border: none;
   border-top: 1px solid var(--border);
-  margin: 24px 0;
+  margin: 28px 0;
 }
 
 /* Tables */
-#guide-body table {
+#guide-body table, .lesson-guide-body table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
-  margin: 14px 0;
+  font-size: 0.93rem;
+  margin: 16px 0;
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-#guide-body th {
+#guide-body th, .lesson-guide-body th {
   background: var(--surface2);
   border: 1px solid var(--border);
-  padding: 7px 10px;
+  padding: 9px 12px;
   text-align: left;
   font-weight: 600;
-  color: var(--text-dim);
+  color: var(--text);
   white-space: nowrap;
 }
-#guide-body td {
+#guide-body td, .lesson-guide-body td {
   border: 1px solid var(--border);
-  padding: 7px 10px;
+  padding: 9px 12px;
   vertical-align: top;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: var(--text);
 }
-#guide-body tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+#guide-body tr:nth-child(even) td,
+.lesson-guide-body tr:nth-child(even) td { background: rgba(255,255,255,0.025); }
 
 /* Collapsible sections */
 .collapsible-h2 { cursor: pointer; user-select: none; }
@@ -513,8 +527,8 @@ body {
 .calc-card:active { background: var(--surface2); }
 .calc-card-title {
   font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 3px;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
   color: var(--text);
 }
 .calc-card-meta {
@@ -576,24 +590,24 @@ body {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 12px 14px;
+  padding: 14px 16px;
   font-family: var(--mono);
-  font-size: 0.84rem;
+  font-size: 0.95rem;
   color: var(--orange);
-  line-height: 1.6;
+  line-height: 1.7;
   white-space: pre-wrap;
 }
 .problem-box {
   background: var(--surface);
   border: 1px solid var(--accent);
   border-radius: var(--radius);
-  padding: 14px 16px;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  padding: 16px 18px;
+  font-size: 1rem;
+  line-height: 1.75;
 }
 .problem-box strong { color: var(--text); }
 .problem-question {
-  margin-top: 12px;
+  margin-top: 14px;
   font-weight: 600;
   color: var(--text);
 }
@@ -613,8 +627,8 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text);
-  padding: 8px 12px;
-  font-size: 0.9rem;
+  padding: 10px 14px;
+  font-size: 1rem;
   font-family: var(--font);
   outline: none;
 }
@@ -673,10 +687,10 @@ body {
   margin-top: 2px;
 }
 .step-content { flex: 1; }
-.step-label { font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.step-label { font-weight: 600; font-size: 0.97rem; margin-bottom: 4px; color: var(--text); }
 .step-calc {
   font-family: var(--mono);
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   color: var(--orange);
   background: var(--surface3);
   border-radius: 4px;
@@ -1291,3 +1305,334 @@ body {
 /* Calc workspace shown state */
 #calc-workspace:not(.hidden) { display: flex; flex-direction: column; flex: 1; overflow-y: auto; }
 #calc-menu:not(.hidden) { display: flex; flex-direction: column; gap: 8px; padding: 14px; overflow-y: auto; flex: 1; }
+
+/* ── Learn Tab ───────────────────────────────────────── */
+.learn-top {
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.learn-progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 0 4px;
+}
+.learn-prog-nums {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.learn-prog-bar {
+  flex: 1;
+  height: 5px;
+  background: var(--surface3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.learn-prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* Curriculum list */
+.learn-curriculum {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0 20px;
+}
+.btn-resume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: calc(100% - 28px);
+  margin: 10px 14px 14px;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.93rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.btn-resume em { font-style: normal; opacity: 0.85; font-weight: 400; }
+.btn-resume:active { opacity: 0.85; }
+.resume-icon { font-size: 1rem; }
+.learn-all-done {
+  margin: 10px 14px 14px;
+  padding: 12px 16px;
+  background: var(--green-dim);
+  border: 1px solid var(--green);
+  border-radius: var(--radius);
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 0.93rem;
+}
+
+.lesson-section-group {
+  margin-bottom: 6px;
+}
+.lesson-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 6px;
+  gap: 8px;
+}
+.lesson-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+.lesson-section-count {
+  font-size: 0.72rem;
+  color: var(--text-dimmer);
+  white-space: nowrap;
+}
+.section-prog-bar {
+  height: 3px;
+  background: var(--surface3);
+  margin: 0 14px 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.section-prog-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+/* Lesson rows */
+.lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background 0.1s;
+}
+.lesson-row:active { background: var(--surface2); }
+.lesson-row.completed { color: var(--text-dim); }
+.lesson-row.completed .lesson-check { color: #4caf50; }
+.lesson-check {
+  font-size: 1rem;
+  min-width: 18px;
+  color: var(--text-dimmer);
+}
+.lesson-heading-text {
+  flex: 1;
+  line-height: 1.4;
+}
+.lesson-row-badges {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.lbadge {
+  font-size: 0.7rem;
+  padding: 1px 5px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.lbadge-plain { background: var(--surface3); color: var(--text-dim); }
+.lbadge-calc  { background: var(--orange-dim); color: var(--orange); }
+.lbadge-img   { background: var(--blue-dim);   color: var(--blue); }
+
+/* Lesson view */
+.learn-lesson {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.lesson-counter-text {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  flex: 1;
+  text-align: center;
+}
+.learn-mark-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.learn-mark-btn.marked {
+  background: var(--green-dim);
+  border-color: var(--green);
+  color: #4caf50;
+}
+.learn-mark-btn:active { opacity: 0.8; }
+
+.lesson-title-bar {
+  padding: 18px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.lesson-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.lesson-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Plain terms block */
+.lesson-plain-terms {
+  padding: 18px 16px;
+  background: rgba(124,92,252,0.07);
+  border-bottom: 2px solid var(--accent);
+}
+.lesson-block-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.lesson-plain-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Guide content block */
+.lesson-guide-content {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.lesson-guide-body { margin-top: 8px; }
+
+/* Inline calc block */
+.lesson-calc-wrap {
+  padding: 16px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.lesson-calc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Image grid block */
+.lesson-img-wrap {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.lesson-img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+@media (min-width: 500px) {
+  .lesson-img-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Image flip cards in lesson */
+.li-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  perspective: 800px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.li-front, .li-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.4s ease;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+}
+.li-front { background: var(--surface); transform: rotateY(0deg); }
+.li-back  { background: var(--surface2); transform: rotateY(180deg); }
+.li-card.flipped .li-front { transform: rotateY(-180deg); }
+.li-card.flipped .li-back  { transform: rotateY(0deg); }
+.li-photo { width: 100%; border-radius: 4px; object-fit: cover; flex: 1; min-height: 0; }
+.li-label { font-size: 0.8rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+.li-desc  { font-size: 0.75rem; line-height: 1.5; color: var(--text-dim); flex: 1; overflow-y: auto; }
+
+/* Lesson nav footer */
+.lesson-nav-footer {
+  display: flex;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  bottom: 0;
+}
+.lesson-nav-btn {
+  flex: 1;
+  padding: 12px 8px;
+  font-size: 0.95rem;
+}
+.lesson-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Problem/question text sizing in lesson context */
+.lesson-calc-card .problem-text { font-size: 1rem; }
+.lesson-calc-card .question-text { font-size: 1rem; }

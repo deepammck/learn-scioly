@@ -1,6 +1,6 @@
 /* ============================================================
    SciOly Study App — Main Controller
-   Tabs: Reference · Calculations · Image ID · Review
+   Tabs: Reference · Calculations · Image ID · Learn
    ============================================================ */
 'use strict';
 
@@ -42,12 +42,13 @@ const state = {
     cardIndex: 0,
     flipped: false,
   },
-  review: {
-    event: 'all',
-    deck: [],
-    index: 0,
-    flipped: false,
-    stats: { known: 0, unknown: 0 },
+  learn: {
+    event: 'desgen',
+    lessons: { desgen: null, forensics: null },
+    lessonIndex: 0,
+    view: 'curriculum',
+    completedIds: new Set(),
+    lastId: null,
   },
 };
 
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReferenceTab();
   initCalcTab();
   initImageIdTab();
-  initReviewTab();
+  initLearnTab();
   switchTab('reference');
 });
 
@@ -89,6 +90,10 @@ function switchTab(tabName) {
   // Lazy-load guide content when reference tab first shown
   if (tabName === 'reference') {
     loadGuide(state.ref.event);
+  }
+  // Open learn tab (loads guide lazily)
+  if (tabName === 'learn') {
+    openLearnTab();
   }
 }
 
@@ -635,136 +640,4 @@ function renderImageIdCard() {
   });
 }
 
-// ── Review Tab ────────────────────────────────────────────────────────────────
-
-function initReviewTab() {
-  document.querySelectorAll('#tab-review .etab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('#tab-review .etab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.review.event = btn.dataset.reviewEvent;
-      buildReviewDeck();
-    });
-  });
-
-  buildReviewDeck();
-}
-
-function buildReviewDeck() {
-  const all = window.FLASHCARD_DATA || [];
-  const ev  = state.review.event;
-
-  let cards = ev === 'all' ? all : all.filter(c => c.event === ev);
-  // Shuffle
-  cards = [...cards].sort(() => Math.random() - 0.5);
-
-  state.review.deck    = cards;
-  state.review.index   = 0;
-  state.review.flipped = false;
-  state.review.stats   = { known: 0, unknown: 0 };
-
-  updateReviewStats();
-  renderReviewCard();
-}
-
-function updateReviewStats() {
-  const { known, unknown } = state.review.stats;
-  const total = state.review.deck.length;
-  const done  = known + unknown;
-  document.getElementById('review-stats').innerHTML =
-    `<span class="stat-known">✓ ${known}</span>` +
-    `<span class="stat-sep"> · </span>` +
-    `<span class="stat-unknown">✗ ${unknown}</span>` +
-    `<span class="stat-sep"> · </span>` +
-    `<span class="stat-remain">${total - done} left</span>`;
-}
-
-function renderReviewCard() {
-  const deck   = state.review.deck;
-  const idx    = state.review.index;
-  const deckEl = document.getElementById('review-deck');
-
-  if (!deck.length) {
-    deckEl.innerHTML = '<p class="calc-empty">No flashcards for this selection.</p>';
-    return;
-  }
-
-  if (idx >= deck.length) {
-    const { known, unknown } = state.review.stats;
-    deckEl.innerHTML = `
-      <div class="review-complete">
-        <div class="review-complete-title">Deck Complete!</div>
-        <div class="review-complete-stats">
-          <span class="stat-known">✓ ${known} known</span>
-          <span class="stat-unknown">✗ ${unknown} still learning</span>
-        </div>
-        <button class="btn-primary" id="review-restart">Restart Deck</button>
-        <button class="btn-secondary" id="review-missed" ${unknown === 0 ? 'disabled' : ''}>Study Missed (${unknown})</button>
-      </div>`;
-
-    document.getElementById('review-restart').addEventListener('click', () => buildReviewDeck());
-    document.getElementById('review-missed').addEventListener('click', () => {
-      // Re-filter to only cards that were marked unknown — rebuild from original
-      const missed = deck.filter((c, i) => {
-        // We don't track which specific cards were missed vs known here,
-        // so just reshuffle missed count cards from the same deck
-        return true; // fallback: restart
-      });
-      buildReviewDeck();
-    });
-    return;
-  }
-
-  const card   = deck[idx];
-  const flipped = state.review.flipped;
-
-  deckEl.innerHTML = `
-    <div class="flashcard-wrap">
-      <div class="review-progress-bar">
-        <div class="review-progress-fill" style="width:${(idx / deck.length * 100).toFixed(1)}%"></div>
-      </div>
-      <div class="flashcard ${flipped ? 'flipped' : ''}" id="review-card" tabindex="0" role="button" aria-label="Tap to flip">
-        <div class="card-front">
-          <div class="card-event-badge ${card.event}">${card.event === 'desgen' ? 'Designer Genes' : 'Forensics'}</div>
-          <div class="card-term">${escapeHtml(card.front)}</div>
-          <div class="card-hint">Tap to reveal answer</div>
-        </div>
-        <div class="card-back">
-          <div class="card-event-badge ${card.event}">${card.event === 'desgen' ? 'Designer Genes' : 'Forensics'}</div>
-          <div class="card-term">${escapeHtml(card.front)}</div>
-          <div class="card-definition">${escapeHtml(card.back)}</div>
-        </div>
-      </div>
-    </div>
-    <div class="review-buttons ${flipped ? '' : 'hidden'}" id="review-btns">
-      <button class="btn-unknown" id="btn-unknown">✗ Still Learning</button>
-      <button class="btn-known"   id="btn-known">✓ Got It</button>
-    </div>
-    <div class="review-nav">
-      <span class="review-counter">${idx + 1} / ${deck.length}</span>
-    </div>`;
-
-  document.getElementById('review-card').addEventListener('click', () => {
-    state.review.flipped = !state.review.flipped;
-    document.getElementById('review-card').classList.toggle('flipped', state.review.flipped);
-    document.getElementById('review-btns').classList.toggle('hidden', !state.review.flipped);
-  });
-
-  document.getElementById('btn-known').addEventListener('click', () => {
-    state.review.stats.known++;
-    state.review.index++;
-    state.review.flipped = false;
-    updateReviewStats();
-    renderReviewCard();
-  });
-
-  document.getElementById('btn-unknown').addEventListener('click', () => {
-    state.review.stats.unknown++;
-    // Put card at end of deck to try again
-    state.review.deck.push(state.review.deck[idx]);
-    state.review.index++;
-    state.review.flipped = false;
-    updateReviewStats();
-    renderReviewCard();
-  });
-}
+// Review tab removed — use Anki for flashcard review.
