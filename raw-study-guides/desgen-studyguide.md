@@ -292,15 +292,15 @@ RF = (number of recombinant offspring) / (total offspring) × 100%
 - RF ranges 0–50%. **50% = genes assort independently** (either on different chromosomes, or so far apart on the same chromosome that crossing over always separates them).
 - 1% RF ≈ **1 map unit = 1 centimorgan (cM).** This conversion is the heart of gene mapping.
 
-**Three-point cross and gene mapping — [State: 2 genes; Nationals: 3 genes].** Covered with full worked method in §3 context and the formula sheet; the mechanics:
+**Gene mapping by testcross — [State: 2 genes; Nationals: 3 genes].**
 
-1. Do a test cross of a trihybrid to a triple recessive so offspring phenotypes reveal gametes directly.
-1. Identify the **two most frequent** classes = parental; the **two least frequent** = double crossovers (DCO).
-1. The gene whose allele “flips” between parental and DCO is the **middle gene.**
-1. RF between two genes = (single crossovers for that interval + double crossovers) / total.
-1. **Interference:** I = 1 − coefficient of coincidence (CoC); CoC = (observed DCO) / (expected DCO), where expected DCO = RF₁ × RF₂ × total. Positive interference (CoC < 1) means one crossover suppresses a nearby second.
-
-Full numeric walkthrough is in §3.7.
+- **Two-point testcross (State primary type):** Cross a dihybrid to a double recessive. Four offspring classes appear; the two smallest are recombinants. RF = recombinants/total × 100%; RF% = cM map distance. Full worked example in **§9.9**.
+- **Three-point cross (Nationals):** additional step to find gene order using double crossovers. Mechanics:
+  1. Test cross a trihybrid to a triple recessive.
+  2. Two largest classes = parental; two smallest = double crossovers (DCO).
+  3. The gene whose allele “flips” between parental and DCO is the **middle gene.**
+  4. RF per interval = (singles for that interval + DCOs) / total; **Interference** I = 1 − CoC; CoC = observed DCO / expected DCO.
+  Full numeric walkthrough in **§9.1**.
 
 # 2. MITOSIS AND MEIOSIS
 
@@ -525,6 +525,31 @@ Note: **premature breast enlargement is not a feature of Down syndrome** — if 
 **Centromere position classification:** **metacentric** (centromere central), **submetacentric** (off-center), **acrocentric** (near one end), **telocentric** (at the very end).
 
 **Reading a karyotype to detect abnormalities (the actual test skill):** count total chromosomes; check the sex pair; scan for an extra or missing chromosome (trisomy/monosomy); look at each homolog pair for length differences or altered banding (deletion, duplication, translocation, inversion). Be able to *write the correct ISCN string* from a described or pictured karyotype and to *infer the syndrome* from the string.
+
+**Worked karyotype interpretation — diagnose + trace the nondisjunction event:**
+
+*Example 1 — 47, XXY (Klinefelter syndrome):*
+- Diagnosis: **Klinefelter syndrome** — male (Y present), infertile, reduced testosterone, often tall, possibly gynecomastia.
+- Nondisjunction origin: three possible routes — (a) **Meiosis I nondisjunction in the father:** X and Y fail to separate → XY sperm fertilizes normal X egg → XXY; (b) **Meiosis I nondisjunction in the mother:** two X homologs fail to separate → XX egg fertilized by Y sperm → XXY; (c) **Meiosis II nondisjunction in the father or mother:** two sister chromatids of one sex chromosome fail to separate → XX sperm (maternal) + Y sperm → XXY, etc.
+- **Key diagnostic principle:** Meiosis I failure = gamete carries both members of a homolog pair (non-identical chromosomes); Meiosis II failure = gamete carries two identical sister chromatids of one chromosome. On a test, state WHICH division (I or II) AND WHICH parent.
+- ISCN string: **47, XXY.**
+
+*Example 2 — 45, X (Turner syndrome):*
+- Diagnosis: **Turner syndrome** — female (no Y), usually sterile (streak gonads), short stature, webbed neck, coarctation of the aorta.
+- Nondisjunction: sex chromosome lost during gamete formation. Most often a sex-chromosome-null sperm (nondisjunction in the father, meiosis I or II) fertilizes a normal X egg → 45, X zygote.
+- ISCN string: **45, X.**
+
+*Example 3 — 47, XY, +21 (Down syndrome):*
+- Diagnosis: **Trisomy 21 = Down syndrome** — intellectual disability, characteristic facial features, congenital heart defects, increased Alzheimer's risk.
+- Nondisjunction: ~95% from **meiosis I nondisjunction in the mother** (chr 21 homologs fail to separate; risk increases sharply with maternal age due to prolonged meiosis I arrest in oocytes). ~4% are Robertsonian translocation (familial, not age-related); ~1% mosaic (mitotic nondisjunction post-fertilization).
+- ISCN string: **47, XY, +21** (male); **47, XX, +21** (female).
+
+*Reading algorithm for any described karyotype:*
+1. Count total chromosomes → compare to 46 (extra = trisomy; missing = monosomy).
+2. Check pair 23 (sex pair): XX = female, XY = male, XXY = Klinefelter, X only = Turner.
+3. Identify which autosome pair has 3 copies; match chromosome size/banding to number.
+4. Write ISCN: [total], [sex chromosomes], [abnormality] — e.g., 47, XX, +18 (female Edwards syndrome).
+5. To determine nondisjunction stage: Meiosis I failure → gamete has both homologs (non-identical); Meiosis II failure → gamete has two identical sister chromatids of one chromosome.
 
 ## 2.7 Somatic recombination: V(D)J recombination & class switching [State/Nat — explicit rules subtopic]
 
@@ -1953,4 +1978,44 @@ The rules emphasize *prokaryotic* expression, but the prokaryote-vs-eukaryote co
 - **Number of bivalents at metaphase I** = n (haploid number); **number of chromosomes** still 2n until anaphase I.
 - **Sanger product count** is linear (one primer), PCR is exponential (two primers) — already in §6 but a frequent contrast point.
 - **PCR primer design rules:** ~18–25 nt, ~40–60% GC, similar Tm for both primers, 3′ end specificity, avoid self-complementarity (hairpins/dimers).
+
+## 9.9 Fully worked TWO-POINT TESTCROSS [State — primary mapping calculation]
+
+Two-point crosses are the standard State-level gene-mapping calculation. You cross a dihybrid to a homozygous recessive tester; offspring phenotypes reveal the gametes the dihybrid produced.
+
+**Setup.** Genes A (dominant = long wings) and B (dominant = gray body) are linked in cis. A female dihybrid **AB / ab** is testcrossed to a double recessive male **ab / ab**. 800 offspring:
+
+|Phenotype              |Gamete from dihybrid|Count|
+|-----------------------|--------------------|-----|
+|Long wings, gray body  |AB (parental)       |285  |
+|Short wings, black body|ab (parental)       |285  |
+|Long wings, black body |Ab (recombinant)    |115  |
+|Short wings, gray body |aB (recombinant)    |115  |
+|**Total**              |                    |**800**|
+
+**Step 1 — Identify parental vs. recombinant classes.**
+- Parental (same allele combination as the dihybrid parent): AB and ab → the **two largest classes** (285 each).
+- Recombinant (new combinations produced by crossing over): Ab and aB → the **two smallest classes** (115 each).
+
+**Step 2 — Compute RF.**
+RF = (recombinants / total) × 100% = (115 + 115) / 800 × 100% = 230/800 × 100% = **28.75%**
+
+**Step 3 — Convert to map distance.**
+28.75% RF = **28.75 cM.** Map: **A —28.75 cM— B.**
+
+**Step 4 — Sanity checks.**
+- RF < 50% → genes **are linked** (not independently assorting). ✓
+- RF = 50% would give a 1:1:1:1 ratio, indistinguishable from independent assortment.
+
+**Cis vs. trans setup recognition:**
+- **Cis (coupling) AB / ab:** large classes are AB and ab; small classes are Ab and aB.
+- **Trans (repulsion) Ab / aB:** large classes are Ab and aB; small classes are AB and ab.
+- The parental arrangement = the majority offspring class. Read it first; that tells you the parental arrangement.
+
+**The reusable algorithm (two-point):**
+1. Two largest offspring classes → parental gametes (= parental allele arrangement in the dihybrid).
+2. Two smallest classes → recombinants.
+3. RF = (sum of recombinant counts) / total × 100%.
+4. RF% = cM map distance between the two genes.
+5. State whether genes are linked (RF < 50%) and write the map.
 
