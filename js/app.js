@@ -242,6 +242,9 @@ function renderGuide(event) {
   // Add heading IDs and build TOC
   buildTOC(guideBody, tocInner);
 
+  // Wire Quick Facts panel
+  if (window.QuickFacts) QuickFacts.init(md, state.ref.tocItems);
+
   // Smooth scroll TOC links
   guideBody.scrollTop = 0;
 }
